@@ -1,7 +1,11 @@
-Rebuild usb_modeswitch from RHEL 9 SRPMs
+Apply the patch for RHEL 10.3:
+
+	patch -p1 < rhel10_3-kernel-6.12-compat.patch
+
+Rebuild usb_modeswitch from RHEL 9 SRPMs:
 Many Realtek USB Wi-Fi adapters initially enumerate as a virtual CD-ROM drive (for Windows drivers) and require usb_modeswitch to flip into Wi-Fi mode. Since Red Hat removed usb_modeswitch and usb_modeswitch-data in RHEL 10, include these steps in your GitHub Pull Request or Issue description so other RHEL 10 users know how to get their USB dongle recognized.
 
-    Install RPM build tools.
+Install RPM build tools.
 dnf install -y rpm-build dnf-utils gcc make libusb1-devel systemd-rpm-macros
 
 Download the RHEL 9 source RPMs. Fetch usb_modeswitch and usb_modeswitch-data from CentOS Stream 9 or Rocky Linux 9 repositories.

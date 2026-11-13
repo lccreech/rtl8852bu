@@ -15,6 +15,10 @@
 #ifndef __OSDEP_LINUX_SERVICE_H_
 #define __OSDEP_LINUX_SERVICE_H_
 
+#ifndef timer_container_of
+#define timer_container_of timer_container_of
+#endif
+
 #include <linux/version.h>
 #include <linux/spinlock.h>
 #include <linux/compiler.h>
@@ -695,7 +699,7 @@ struct rtw_timer_list {
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
 static inline void timer_hdl(struct timer_list *in_timer)
 {
-	_timer *ptimer = from_timer(ptimer, in_timer, timer);
+	_timer *ptimer = timer_container_of(ptimer, in_timer, timer);
 
 	ptimer->function(ptimer->arg);
 }
